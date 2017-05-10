@@ -9,7 +9,6 @@ server.on('error', (err) => {
 server.on('message', (msg, rinfo) => {
     console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`)
 
-    // send data to localhost:45999
     const message = Buffer.from(msg)
     const client = dgram.createSocket('udp4')
     client.send(message, 45998, 'localhost', (err) => {
