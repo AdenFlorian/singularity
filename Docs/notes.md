@@ -1,0 +1,2 @@
+i want other player characers on my screen to be moving around based off of their position on their owners client
+i want my character to only move in response to my commands, and to send its position to all other clients
