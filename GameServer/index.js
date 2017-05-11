@@ -1,34 +1,34 @@
 const dgram = require('dgram')
-const server = dgram.createSocket('udp4')
 
-server.on('error', (err) => {
+const receiveingSocket = dgram.createSocket('udp4')
+
+receiveingSocket.on('error', (err) => {
     console.log(`server error:\n${err.stack}`)
-    server.close()
+    receiveingSocket.close()
 })
 
-server.on('message', (msg, rinfo) => {
+receiveingSocket.on('message', (msg, rinfo) => {
     console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`)
 
     // send data to localhost:45999
     const message = Buffer.from(msg)
-    const client = dgram.createSocket('udp4')
-    client.send(message, 45998, 'localhost', (err) => {
+    const sendingSocket = dgram.createSocket('udp4')
+    sendingSocket.send(message, 45998, 'localhost', (err) => {
         if (err) throw err
         console.log('sent! ')
-        client.close()
+        sendingSocket.close()
     })
-    const client2 = dgram.createSocket('udp4')
-    client2.send(message, 45999, 'localhost', (err) => {
+    const sendingSocket2 = dgram.createSocket('udp4')
+    sendingSocket2.send(message, 45999, 'localhost', (err) => {
         if (err) throw err
         console.log('sent! ')
-        client2.close()
+        sendingSocket2.close()
     })
-
 })
 
-server.on('listening', () => {
-    var address = server.address()
+receiveingSocket.on('listening', () => {
+    var address = receiveingSocket.address()
     console.log(`server listening ${address.address}:${address.port}`)
 })
 
-server.bind(20547)
+receiveingSocket.bind(20547)

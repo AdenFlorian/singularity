@@ -49,11 +49,11 @@ public class UdpListener : MonoBehaviour
 
 		if (netPosition.Id == 0)
 		{
-			UdpListener.Instance.player1.Move(new Vector3(netPosition.positionX, netPosition.positionY, netPosition.positionZ));
+			UdpListener.Instance.player1.UpdateNetworkPosition(new Vector3(netPosition.positionX, netPosition.positionY, netPosition.positionZ));
 		}
 		else
 		{
-            UdpListener.Instance.player2.Move(new Vector3(netPosition.positionX, netPosition.positionY, netPosition.positionZ));
+            UdpListener.Instance.player2.UpdateNetworkPosition(new Vector3(netPosition.positionX, netPosition.positionY, netPosition.positionZ));
 		}
 
         Debug.Log("Received: " + receiveString);

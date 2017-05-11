@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 public class NetworkedPlayer : MonoBehaviour
 {
-	public int Id;
+	public int NetworkId;
 	public bool playerControlled;
 
 	UdpClient _udpClient = new UdpClient();
@@ -39,7 +39,7 @@ public class NetworkedPlayer : MonoBehaviour
 				timer -= timeToSend;
                 try
                 {
-                    var netPosition = new NetworkPosition(Id, _transform.position);
+                    var netPosition = new NetworkPosition(NetworkId, _transform.position);
                     var netPositionJson = JsonConvert.SerializeObject(netPosition);
                     var sendBytes = Encoding.ASCII.GetBytes(netPositionJson);
 
@@ -53,7 +53,7 @@ public class NetworkedPlayer : MonoBehaviour
 		}
 	}
 
-	public void Move(Vector3 newPosition)
+	public void UpdateNetworkPosition(Vector3 newPosition)
 	{
 		latestNetworkPosition = newPosition;
 	}
