@@ -2,6 +2,16 @@ const dgram = require('dgram')
 
 const receiveingSocket = dgram.createSocket('udp4')
 
+function connectedClient(netid, address, port) {
+    return new {
+        networkId: netid,
+        ipAddress: address,
+        port: port
+    }
+}
+
+var connectedClients = []
+
 receiveingSocket.on('error', (err) => {
     console.log(`server error:\n${err.stack}`)
     receiveingSocket.close()

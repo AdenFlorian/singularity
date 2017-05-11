@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 public class NetworkedPlayer : MonoBehaviour
 {
-	public int NetworkId;
+	public Guid NetworkGuid = Guid.NewGuid();
 	public bool playerControlled;
 
 	UdpClient _udpClient = new UdpClient();
@@ -39,10 +39,11 @@ public class NetworkedPlayer : MonoBehaviour
 				timer -= timeToSend;
                 try
                 {
-                    var netPosition = new NetworkPosition(NetworkId, _transform.position);
+                    var netPosition = new NetworkPosition(NetworkGuid, _transform.position);
                     var netPositionJson = JsonConvert.SerializeObject(netPosition);
                     var sendBytes = Encoding.ASCII.GetBytes(netPositionJson);
 
+					Debug.Log("Sending...");
                     _udpClient.Send(sendBytes, sendBytes.Length, "127.0.0.1", 20547);
                 }
                 catch (Exception ex)

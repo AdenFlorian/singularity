@@ -1,3 +1,6 @@
+notes
+=====
+
 i want other player characers on my screen to be moving around based off of their position on their owners client
 i want my character to only move in response to my commands, and to send its position to all other clients
 
@@ -10,8 +13,8 @@ What to call a script that send it's gameobjects position to the server?
 
 NetworkSender?
 
-Networkd IDs
-------------
+Network IDs
+-----------
 
 What needs a network ID (netid)?
 
